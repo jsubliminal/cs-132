@@ -1,7 +1,3 @@
-/*
- * Renders window.SITE (from content.js) into the page.
- * Content edits belong in content.js, not here.
- */
 (function () {
   "use strict";
 
@@ -9,8 +5,6 @@
   if (!S) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // ---------- helpers ----------
 
   function escapeHTML(str) {
     return String(str)
@@ -20,7 +14,6 @@
       .replace(/"/g, "&quot;");
   }
 
-  // `code`, **bold**, [label](url). Input is escaped first.
   function inline(str) {
     return escapeHTML(str || "")
       .replace(/`([^`]+)`/g, "<code>$1</code>")
@@ -43,10 +36,6 @@
     return parts[parts.length - 1];
   }
 
-  // ---------- Google Sheets ----------
-
-  // Accepts a normal share link (.../spreadsheets/d/ID/edit#gid=N),
-  // a "Publish to web" CSV link, or any direct CSV URL.
   function sheetCsvUrl(url) {
     if (/output=csv|format=csv|tqx=out:csv/.test(url)) return url;
     const id = (url.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/) || [])[1];
@@ -55,7 +44,6 @@
     return `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&gid=${gid}`;
   }
 
-  // Minimal RFC 4180 parser: quoted fields, escaped quotes, CRLF.
   function parseCSV(text) {
     const rows = [];
     let row = [], field = "", quoted = false;
@@ -105,15 +93,11 @@
     return `<a class="btn btn-glass" href="${escapeHTML(sheet.url)}" target="_blank" rel="noopener">${escapeHTML(sheet.label || "Open sheet")}</a>`;
   }
 
-  // ---------- simple bindings ----------
-
   document.querySelectorAll("[data-bind]").forEach((node) => {
     const value = get(node.getAttribute("data-bind"));
     if (value != null) node.innerHTML = inline(value);
   });
   document.title = `${S.meta.shortTitle} | ${S.meta.groupName}`;
-
-  // ---------- hero ----------
 
   $("hero-title").innerHTML = (S.meta.heroLines || [S.meta.shortTitle])
     .map((line) => `<span class="line">${escapeHTML(line)}</span>`).join("");
@@ -129,8 +113,6 @@
   } else if (rqImage) {
     rqImage.remove();
   }
-
-  // ---------- background ----------
 
   const BG = S.background || {};
   $("bg-stats").innerHTML = (BG.stats || []).map((st) => `
@@ -172,8 +154,6 @@
       <span class="hyp"><span class="hyp-tag">H<sub>1</sub></span><span>${inline(h.alternative)}</span></span>`;
   }
 
-  // ---------- research questions ----------
-
   $("sdg-list").innerHTML = (S.questions.sdgs || []).map((g) => `
     <li><strong>${escapeHTML(g.num)}. ${inline(g.name)}:</strong> ${inline(g.detail)}</li>`).join("");
 
@@ -211,8 +191,6 @@
     });
   });
 
-  // ---------- datasets ----------
-
   $("datasets").innerHTML = S.data.datasets.map((d) => `
     <article class="dataset reveal">
       <div class="dataset-top">
@@ -242,8 +220,6 @@
 
   $("constraints-list").innerHTML = S.data.constraints.map((c) => `
     <li><span class="constraint-title">${inline(c.title)}</span> ${inline(c.body)}</li>`).join("");
-
-  // ---------- findings ----------
 
   function barChart(chart) {
     const data = chart.data || [];
@@ -323,8 +299,6 @@
       </li>`).join("")
     : `<li class="sheets-empty">Our Google Sheets will be linked here.</li>`;
 
-  // ---------- methodology ----------
-
   $("method-steps").innerHTML = S.methodology.steps.map((s, i) => `
     <div class="method-step reveal">
       <span class="method-num">${String(i + 1).padStart(2, "0")}</span>
@@ -339,27 +313,19 @@
       <td>${inline(v.use)}</td>
     </tr>`).join("");
 
-  // ---------- team ----------
-
   $("team-list").innerHTML = S.team.members.map((m) => `
     <li class="member reveal">
       <span class="member-name">${escapeHTML(m.name)}</span>
       ${m.role ? `<span class="member-role">${inline(m.role)}</span>` : ""}
     </li>`).join("");
 
-  // ---------- references ----------
-
   $("references-list").innerHTML = (S.references || []).map((r) => `<li>${inline(r)}</li>`).join("");
-
-  // ---------- sources ----------
 
   $("sources-list").innerHTML = S.sources.map((s) => `
     <li>
       <a href="${escapeHTML(s.url)}" target="_blank" rel="noopener">${inline(s.label)}</a>
       <span>${inline(s.publisher)}</span>
     </li>`).join("");
-
-  // ---------- reveal on scroll ----------
 
   if (!reduceMotion && "IntersectionObserver" in window) {
     document.documentElement.classList.add("can-reveal");
@@ -372,8 +338,6 @@
     }, { rootMargin: "0px 0px -8% 0px" });
     document.querySelectorAll(".reveal").forEach((el) => revealer.observe(el));
   }
-
-  // ---------- top bar: match the tone of the section underneath, mark active link ----------
 
   const topbar = document.querySelector(".topbar");
   const toned = Array.from(document.querySelectorAll("main [data-tone], .footer"));
@@ -402,8 +366,6 @@
     moveLens(links.find((a) => a.getAttribute("href") === activeId));
   }
 
-  // The glass lens glides between nav links. CSS transitions start from the
-  // current on-screen value, so fast scrolling re-targets without a jump.
   const lens = document.querySelector(".nav-lens");
   function moveLens(link) {
     if (!lens) return;
@@ -412,8 +374,6 @@
     lens.style.width = `${link.offsetWidth}px`;
     lens.style.transform = `translateX(${link.offsetLeft}px)`;
   }
-
-  // ---------- liquid glass: specular highlight follows the pointer ----------
 
   if (window.matchMedia("(hover: hover)").matches) {
     let pending = null;

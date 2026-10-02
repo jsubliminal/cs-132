@@ -3,7 +3,7 @@ window.SITE = {
     title:
       "Leaving for a Living: Measuring Labor Inequality and Inaccessibility through the impact of Macroeconomic and Regional Factors on the Financial Mobility of OFWs",
     shortTitle: "Leaving for a Living",
-   
+
     heroLines: ["Leaving for a", "Living:"],
     subtitle:
       "Measuring labor inequality and inaccessibility through the impact of macroeconomic and regional factors on the financial mobility of OFWs",
@@ -15,10 +15,9 @@ window.SITE = {
       "Who gets to save, and who only sends money home? We use PSA survey microdata to trace how local labor conditions, individual circumstances, and geography shape the financial mobility of Overseas Filipino Workers.",
   },
 
-
   images: {
     hero: [],
-    questions: null, 
+    questions: null,
   },
 
   background: {
@@ -177,7 +176,6 @@ window.SITE = {
       },
     ],
 
-
     details: [
       {
         title: "Data Collection Process",
@@ -273,9 +271,6 @@ window.SITE = {
     ],
   },
 
-  /*
-   * GOOGLE SHEETS
-   */
   sheets: [
     { label: "CS 132 Project Group 4", note: "Our full spreadsheet: data, dictionary, and value sets", url: "https://docs.google.com/spreadsheets/d/1SyQFrcPC2vEwx7h2z4060tF8bhLo3QQHVNgpV4FvUtc/edit?usp=sharing" },
     { label: "SOF PUF 2024", note: "The full public use file: 3,931 records, 44 variables", url: "https://docs.google.com/spreadsheets/d/1SyQFrcPC2vEwx7h2z4060tF8bhLo3QQHVNgpV4FvUtc/edit#gid=782984696" },

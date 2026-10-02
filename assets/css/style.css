@@ -1,12 +1,6 @@
-/* =========================================================
-   Leaving for a Living
-   Blue / white editorial system, matched to the project deck.
-   ========================================================= */
-
-/* ---------- tokens ---------- */
 :root {
-  --blue: #0f74d6;          /* hero type blue */
-  --blue-field: #3a7bd5;    /* section background blue */
+  --blue: #0f74d6;
+  --blue-field: #3a7bd5;
   --blue-deep: #0b3c78;
   --navy: #082a55;
   --blue-tint: #eaf2fc;
@@ -14,7 +8,7 @@
   --white: #ffffff;
   --ink: #0d2240;
   --ink-soft: #3c5677;
-  --yellow: #ffd23f;        /* brand mark on blue, as in the deck */
+  --yellow: #ffd23f;
   --green: #3ddc84;
   --sky: #a9cdff;
 
@@ -24,12 +18,11 @@
 
   --wrap: 1240px;
   --gutter: clamp(16px, 4vw, 48px);
-  --radius: 4px;            /* the deck uses near-square cards */
-  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);   /* critically damped feel */
+  --radius: 4px;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
   --bar-h: 64px;
 }
 
-/* ---------- base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--bar-h) + 12px); }
@@ -61,7 +54,6 @@ code {
 
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
 
-/* Type scale: tracking tightens as size grows, leading tightens too. */
 .display {
   font: 800 clamp(3rem, 9vw, 8rem)/0.86 var(--display);
   letter-spacing: -0.045em;
@@ -84,9 +76,8 @@ code {
 }
 .lede { font-size: 1.1rem; max-width: 56ch; margin: 0; opacity: 0.9; }
 
-/* ---------- section tones ---------- */
 .section { padding: clamp(80px, 11vw, 150px) 0; position: relative; }
-/* Blue sections carry soft light so the glass has something to bend. */
+
 .tone-blue {
   color: var(--white);
   background:
@@ -100,7 +91,6 @@ code {
 
 .section-head { display: grid; gap: 24px; margin-bottom: clamp(40px, 6vw, 72px); }
 
-/* ---------- top bar: a floating liquid-glass capsule ---------- */
 .topbar {
   position: fixed; inset: 12px 0 auto 0; z-index: 20;
   padding: 0 var(--gutter);
@@ -142,7 +132,6 @@ code {
 .nav a:hover, .nav a.active { opacity: 1; }
 .nav a:active { transform: scale(0.94); }
 
-/* the lens that glides to the active link */
 .nav-lens {
   position: absolute; left: 0; top: 4px; bottom: 4px; width: 0;
   border-radius: 999px;
@@ -162,7 +151,6 @@ code {
   .nav a { padding: 9px 11px; font-size: 0.74rem; }
 }
 
-/* ---------- hero ---------- */
 .hero {
   position: relative; overflow: hidden;
   min-height: 100svh;
@@ -173,17 +161,15 @@ code {
 }
 .hero-inner { position: relative; z-index: 2; width: 100%; text-align: center; }
 
-/* meta row and title share one shrink-wrapped box, so the meta spans
-   exactly the width of the title's longest line */
 .hero-meta span:last-child { margin-left: auto; text-align: right; }
 .hero-lockup { --title-size: clamp(3.1rem, 11.2vw, 10.25rem); width: fit-content; max-width: 100%; margin: 0 auto; }
 .hero-meta {
   display: flex; justify-content: space-between; gap: 4px 16px; flex-wrap: wrap;
   margin: 0 0 6px;
-  /* optical correction: match the ink of the L and the A, not their boxes */
+
   padding-left: calc(var(--title-size) * 0.037);
   margin-right: calc(var(--title-size) * -0.032);
-  /* never let the meta row set the width; the title does */
+
   width: 0; min-width: calc(100% + var(--title-size) * 0.032);
   font: 700 clamp(0.72rem, 1.1vw, 0.95rem)/1.2 var(--display);
   letter-spacing: 0.005em; text-transform: uppercase; text-align: left;
@@ -222,7 +208,6 @@ code {
 .hero-img.is-blurred { filter: blur(7px); }
 @media (max-width: 760px) { .hero-img { height: 46%; opacity: 0.35; } }
 
-/* entrance: lines rise in, critically damped, no overshoot */
 @media (prefers-reduced-motion: no-preference) {
   .hero-meta, .hero-title .line, .hero-subtitle, .hero-course {
     animation: rise 900ms var(--ease-out) both;
@@ -236,11 +221,9 @@ code {
 @keyframes rise { from { opacity: 0; transform: translateY(0.35em); } to { opacity: 1; transform: none; } }
 @keyframes fade { from { opacity: 0; } }
 
-/* ---------- reveal on scroll (only when JS + motion allowed) ---------- */
 .can-reveal .reveal { opacity: 0; transform: translateY(28px); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
 .can-reveal .reveal.is-in { opacity: 1; transform: none; }
 
-/* ---------- background ---------- */
 .bg-section { border-top: 1px solid var(--blue-line); }
 .bg-lede { font: 700 clamp(1.25rem, 2.4vw, 1.9rem)/1.2 var(--display); letter-spacing: -0.015em; color: var(--ink); max-width: 36ch; margin: 0; }
 .bg-stats {
@@ -257,7 +240,7 @@ code {
 .sdg-intro { color: var(--ink-soft); max-width: 60ch; }
 .sdg-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 24px; margin-top: 8px; align-items: start; }
 .sdg-card { border-radius: 22px; overflow: hidden; background: #fff; border: 1px solid var(--blue-line); }
-/* the tile echoes the UN goal icons: big number, goal name, official color */
+
 .sdg-tile {
   display: flex; align-items: center; gap: 18px;
   padding: 22px 28px; background: var(--sdg); color: #fff;
@@ -281,7 +264,6 @@ code {
 .sdg-rqs a:active { transform: scale(0.95); }
 .sdg-why { font-size: 0.95rem; color: var(--ink-soft); margin: 4px 0 0; padding-top: 18px; border-top: 1px solid var(--blue-line); }
 
-/* ---------- hypotheses inside question cards ---------- */
 .hyp { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin-bottom: 10px; }
 .hyp:last-child { margin-bottom: 0; }
 .hyp-tag {
@@ -292,7 +274,6 @@ code {
 .hyp-tag sub { font-size: 0.7em; }
 .obj-items { margin: 8px 0 0; padding-left: 1.1em; }
 
-/* ---------- research questions ---------- */
 .rq-layout { display: grid; grid-template-columns: 1fr minmax(0, 520px); gap: clamp(40px, 6vw, 96px); align-items: start; }
 .rq-left { position: sticky; top: calc(var(--bar-h) + 52px); display: flex; flex-direction: column; }
 .rq-image img { display: block; max-height: 46vh; width: auto; margin-bottom: -0.2em; }
@@ -334,7 +315,6 @@ code {
 .rq-more svg { width: 12px; height: 12px; transition: transform 300ms var(--ease-out); }
 .rq-card.is-open .rq-more svg { transform: rotate(180deg); }
 
-/* height animates from its current value, so a second click mid-way reverses smoothly */
 .rq-detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 380ms var(--ease-out); }
 .rq-card.is-open .rq-detail { grid-template-rows: 1fr; }
 .rq-detail-inner { overflow: hidden; }
@@ -353,7 +333,6 @@ code {
   .rq-left { position: static; }
 }
 
-/* ---------- data ---------- */
 .dataset-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px; }
 .dataset {
   padding: clamp(28px, 3.4vw, 44px);
@@ -393,7 +372,6 @@ code {
 .btn:active { transform: scale(0.97); }
 .dataset:first-child .btn { background: var(--white); color: var(--blue); }
 
-/* long-form write-up: heading column + text column, like an editorial spread */
 .data-details { margin-top: clamp(48px, 7vw, 88px); }
 .data-block {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: 16px 48px;
@@ -426,7 +404,6 @@ code {
 .constraints li strong { color: var(--ink); }
 .constraints .constraint-title { display: block; font: 800 1rem/1.15 var(--display); text-transform: uppercase; letter-spacing: -0.005em; color: var(--ink); margin-bottom: 6px; }
 
-/* ---------- findings ---------- */
 .findings { display: grid; gap: 24px; }
 .finding { padding: clamp(24px, 3vw, 40px); }
 .finding-head { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
@@ -468,7 +445,6 @@ code {
 .can-reveal .finding.is-in .bar-fill { transform: none; }
 .bar-value { font: 500 0.78rem var(--mono); color: var(--ink); min-width: 4ch; text-align: right; }
 
-/* ---------- methodology ---------- */
 .method-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 40px; margin-bottom: 56px; }
 .method-step { border-top: 2px solid var(--blue); padding-top: 16px; }
 .method-num { display: block; font: 900 1.6rem/1 var(--display); letter-spacing: -0.04em; color: var(--blue); margin-bottom: 14px; }
@@ -488,7 +464,6 @@ code {
 .var-table tbody tr:hover { background: var(--blue-tint); }
 .var-table td:first-child { white-space: nowrap; }
 
-/* ---------- team ---------- */
 .team { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, 0.5); }
 .member {
   display: flex; align-items: baseline; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap;
@@ -498,7 +473,6 @@ code {
 .member-name { font: 800 clamp(2rem, 5.5vw, 4.5rem)/0.95 var(--display); letter-spacing: -0.04em; text-transform: uppercase; }
 .member-role { font: 600 0.85rem var(--display); letter-spacing: 0.03em; text-transform: uppercase; opacity: 0.85; }
 
-/* ---------- footer ---------- */
 .references { margin: 0 0 40px; padding: 0; list-style: none; display: grid; gap: 12px; max-width: 90ch; }
 .references li { font-size: 0.88rem; line-height: 1.55; opacity: 0.85; padding-left: 2em; text-indent: -2em; }
 .references a { word-break: break-all; }
@@ -511,12 +485,6 @@ code {
 .sources span { font-size: 0.82rem; opacity: 0.65; }
 .footer-note { font-size: 0.8rem; opacity: 0.6; max-width: 72ch; margin: 0; }
 
-/* =========================================================
-   Liquid glass
-   Layers: tinted translucent body + backdrop blur (and, in Chromium,
-   refraction through #glass-refract), a bright specular rim, an inner
-   glow, and a soft highlight that follows the pointer.
-   ========================================================= */
 .glass {
   --tint: rgba(255, 255, 255, 0.10);
   --rim: rgba(255, 255, 255, 0.75);
@@ -533,10 +501,9 @@ code {
     0 12px 36px -12px rgba(6, 30, 70, 0.45);
   transition: box-shadow 240ms var(--ease-out), background-color 240ms var(--ease-out);
 }
-/* Chromium understands url() here; others drop this line and keep the blur above. */
+
 .glass { backdrop-filter: url(#glass-refract) blur(14px) saturate(115%) brightness(1.04); }
 
-/* specular rim: brighter where light hits (top-left), fading around the edge */
 .glass::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
   border-radius: inherit; padding: 1px;
@@ -546,7 +513,7 @@ code {
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   pointer-events: none;
 }
-/* pointer-following sheen */
+
 .glass::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
   border-radius: inherit;
@@ -556,7 +523,6 @@ code {
 }
 .glass:hover::after { opacity: 1; }
 
-/* the nav capsule takes the tone of what's underneath */
 .topbar .glass { --tint: rgba(255, 255, 255, 0.55); --rim: rgba(255, 255, 255, 0.95); box-shadow: inset 0 1px 0 rgba(255,255,255,.8), inset 0 -1px 0 rgba(255,255,255,.3), 0 8px 30px -10px rgba(15, 116, 214, 0.35), 0 0 0 0.5px rgba(15, 116, 214, 0.12); }
 .topbar[data-tone="blue"] .glass { --tint: rgba(255, 255, 255, 0.14); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 0 rgba(255,255,255,.15), 0 10px 30px -10px rgba(6, 30, 70, 0.5); }
 .topbar[data-tone="dark"] .glass { --tint: rgba(255, 255, 255, 0.08); --rim: rgba(255, 255, 255, 0.5); box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 10px 30px -10px rgba(0, 0, 0, 0.6); }
@@ -568,7 +534,6 @@ code {
 .placeholder { border-radius: 16px; }
 .chart { border-radius: 16px; }
 
-/* glass button */
 .btn-glass {
   position: relative; margin: 0;
   background: rgba(255, 255, 255, 0.16); color: var(--white);
@@ -580,7 +545,6 @@ code {
 .dataset:first-child .btn { background: rgba(255, 255, 255, 0.18); color: var(--white); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 6px 18px -8px rgba(6, 30, 70, 0.5); }
 .dataset:first-child .btn:hover { background: rgba(255, 255, 255, 0.26); }
 
-/* ---------- sheets ---------- */
 .sheets { margin-top: 56px; }
 .sheets-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .sheets-list li:first-child { grid-column: 1 / -1; }
@@ -608,7 +572,6 @@ code {
 
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* ---------- accessibility preferences ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 1ms !important; animation: none !important; }
@@ -625,11 +588,6 @@ code {
 .sheets-list li { display: flex; }
 .sheet-card { flex: 1; align-content: start; }
 
-/* =========================================================
-   Print (the submitted PDF is a browser print of this page)
-   White layout that reads the same with or without
-   "print backgrounds", every section visible, questions expanded.
-   ========================================================= */
 @media print {
   @page { margin: 16mm 14mm; }
 
@@ -643,11 +601,9 @@ code {
 
   .topbar, .hero-images, .rq-image, noscript, svg.sr-only { display: none !important; }
 
-  /* show everything the scroll animations would have revealed */
   .reveal, .can-reveal .reveal { opacity: 1 !important; transform: none !important; }
   .bar-fill { transform: none !important; }
 
-  /* every section on white */
   .section, .tone-blue, .tone-white, .hero, .footer { background: #fff !important; color: var(--ink) !important; }
   .section { padding: 18pt 0 !important; }
   .wrap { max-width: none; padding: 0; }
@@ -656,18 +612,16 @@ code {
   .section-head { margin-bottom: 14pt; gap: 8pt; }
   h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
 
-  /* hero */
   .hero { min-height: 0 !important; padding: 0 0 18pt !important; display: block; }
   .hero, .hero-title, .hero-subtitle, .hero-meta { color: var(--blue) !important; }
   .hero-title { font-size: 48pt !important; }
   .hero-meta { font-size: 7pt; }
 
-  /* glass and colored panels become outlined white cards */
   .glass, .rq-card, .finding, .sheet-card, .sdg-card, .dataset, .constraints, .chart {
     background: #fff !important; color: var(--ink) !important;
     border: 1px solid var(--blue-line) !important; border-radius: 8px !important;
   }
-  /* small items stay whole; long ones may split so pages don't go half empty */
+
   .sheet-card, .chart, .bg-stat, .var-group, .constraints li, .hyp, .member, .method-step { break-inside: avoid; page-break-inside: avoid; }
   .section-head, .data-block h3, .rq-toggle, .finding-head, .sdg-card h4 { break-after: avoid; page-break-after: avoid; }
   p { orphans: 3; widows: 3; }
@@ -681,7 +635,6 @@ code {
   .facts { border-top-color: var(--blue) !important; }
   .facts div { border-bottom-color: var(--blue-line) !important; }
 
-  /* research questions: one column, every card open */
   .rq-layout { display: block; }
   .rq-left { position: static !important; margin-bottom: 12pt; }
   .rule { border-top-color: var(--blue-line) !important; }
@@ -697,7 +650,6 @@ code {
   .rq-detail dd { color: var(--ink) !important; }
   .hyp-tag { color: var(--blue) !important; background: var(--blue-tint) !important; }
 
-  /* long-form blocks */
   .data-block { padding: 12pt 0 14pt; grid-template-columns: 1fr 2.6fr; gap: 8pt 20pt; }
   .bg-stats { grid-template-columns: repeat(4, 1fr) !important; }
   .bg-stat { padding: 12pt 12pt 10pt 0; }
@@ -705,13 +657,11 @@ code {
   .constraints { padding: 14pt !important; }
   .constraints li::before { font-size: 16pt; }
 
-  /* findings */
   .finding { padding: 14pt !important; }
   .placeholder { min-height: 0 !important; padding: 10pt !important; border-color: var(--blue-line) !important; background: none !important; color: var(--ink-soft) !important; }
   .placeholder span { color: var(--ink) !important; }
   .finding-q, .finding-summary { color: var(--ink) !important; opacity: 1 !important; }
 
-  /* links: keep them, and print the address for the sheets and buttons */
   .btn, .btn-glass, .dataset:first-child .btn {
     background: none !important; color: var(--blue) !important; padding: 0 !important;
     text-transform: none; font: 600 9pt var(--text);
@@ -727,7 +677,6 @@ code {
   .sheet-url { font: 7.5pt/1.4 var(--mono); color: var(--ink-soft); word-break: break-all; margin-top: 4pt; }
   #team { break-inside: avoid; page-break-inside: avoid; }
 
-  /* team and footer */
   .member { border-bottom-color: var(--blue-line) !important; padding: 6pt 0 !important; }
   .team { border-top-color: var(--blue-line) !important; }
   .member-name { font-size: 20pt !important; color: var(--blue) !important; }
