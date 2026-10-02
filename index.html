@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#ffffff">
+  <title>Leaving for a Living | CS132 OFW Project</title>
+  <meta name="description" content="A CS132 data science project on labor inequality and the financial mobility of Overseas Filipino Workers, using PSA survey microdata.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261002b">
+</head>
+<body>
+  <!-- Refraction filter for liquid glass (Chromium applies it; other browsers fall back to blur) -->
+  <svg class="sr-only" aria-hidden="true" focusable="false">
+    <filter id="glass-refract" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="7" result="noise"/>
+      <feGaussianBlur in="noise" stdDeviation="2" result="soft"/>
+      <feDisplacementMap in="SourceGraphic" in2="soft" scale="38" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+  <header class="topbar" data-tone="white">
+    <div class="topbar-inner glass">
+      <a class="brand" href="#top" aria-label="Back to top">
+        <svg class="brand-mark" viewBox="0 0 22 18" aria-hidden="true">
+          <path d="M9 0a9 9 0 0 0 0 18V0z"/>
+          <path d="M16 0a9 9 0 0 0 0 18V0z" opacity=".75"/>
+          <rect x="17.5" y="0" width="3.5" height="18" rx="1.75"/>
+        </svg>
+        <span data-bind="meta.brand"></span>
+      </a>
+      <nav class="nav" aria-label="Sections">
+        <span class="nav-lens" aria-hidden="true"></span>
+        <a href="#background">Background</a>
+        <a href="#questions">Questions</a>
+        <a href="#data">Data</a>
+        <a href="#findings">Findings</a>
+        <a href="#methodology">Method</a>
+        <a href="#team">Team</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" data-tone="white">
+      <div id="hero-images" class="hero-images" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <div class="hero-lockup">
+          <div class="hero-meta">
+            <span data-bind="meta.groupName"></span>
+            <span id="hero-names"></span>
+          </div>
+          <h1 class="hero-title" id="hero-title"></h1>
+        </div>
+        <p class="hero-subtitle" data-bind="meta.subtitle"></p>
+        <p class="hero-thesis reveal" data-bind="meta.thesis"></p>
+        <p class="hero-course"><span data-bind="meta.course"></span> &middot; <span data-bind="meta.university"></span></p>
+      </div>
+    </section>
+
+    <!-- BACKGROUND -->
+    <section id="background" class="section tone-white bg-section" data-tone="white">
+      <div class="wrap">
+        <header class="section-head">
+          <h2 class="display reveal">Back&shy;ground</h2>
+          <p class="bg-lede reveal" data-bind="background.lede"></p>
+        </header>
+        <div id="bg-stats" class="bg-stats reveal"></div>
+        <div id="bg-blocks" class="data-details"></div>
+        <div class="sdg-block">
+          <h3 class="eyebrow-lg">Sustainable Development Goals</h3>
+          <p class="sdg-intro" data-bind="background.sdgIntro"></p>
+          <div id="sdg-cards" class="sdg-cards"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section id="questions" class="section tone-blue" data-tone="blue">
+      <div class="wrap rq-layout">
+        <div class="rq-left">
+          <div id="rq-image" class="rq-image" aria-hidden="true"></div>
+          <h2 class="display reveal">Research<br>Questions</h2>
+          <hr class="rule">
+          <p class="eyebrow">Chosen SDGs</p>
+          <ol id="sdg-list" class="sdgs"></ol>
+        </div>
+        <div class="rq-right">
+          <p class="lede" data-bind="questions.intro"></p>
+          <div id="questions-list" class="rq-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DATA -->
+    <section id="data" class="section tone-white" data-tone="white">
+      <div class="wrap">
+        <header class="section-head">
+          <h2 class="display reveal">The Data</h2>
+          <p class="lede" data-bind="data.intro"></p>
+        </header>
+        <div id="datasets" class="dataset-grid"></div>
+        <div id="data-details" class="data-details"></div>
+        <div class="constraints reveal">
+          <h3 class="eyebrow-lg">Limitations</h3>
+          <ol id="constraints-list"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINDINGS -->
+    <section id="findings" class="section tone-blue" data-tone="blue">
+      <div class="wrap">
+        <header class="section-head">
+          <h2 class="display reveal">Findings</h2>
+          <p class="lede" data-bind="findings.intro"></p>
+        </header>
+        <div id="findings-list" class="findings"></div>
+        <div class="sheets">
+          <h3 class="eyebrow-lg">Our data in Google Sheets</h3>
+          <ul id="sheets-list" class="sheets-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- METHODOLOGY -->
+    <section id="methodology" class="section tone-white" data-tone="white">
+      <div class="wrap">
+        <header class="section-head">
+          <h2 class="display reveal">Method&shy;ology</h2>
+          <p class="lede" data-bind="methodology.intro"></p>
+        </header>
+        <div id="method-steps" class="method-steps"></div>
+        <div class="table-scroll reveal">
+          <table class="var-table">
+            <thead><tr><th scope="col">Variable</th><th scope="col">Meaning</th><th scope="col">Used for</th></tr></thead>
+            <tbody id="var-rows"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team" class="section tone-blue" data-tone="blue">
+      <div class="wrap">
+        <header class="section-head">
+          <h2 class="display reveal">The Team</h2>
+          <p class="lede"><span data-bind="meta.groupName"></span>. <span data-bind="meta.course"></span>, <span data-bind="meta.university"></span>.</p>
+        </header>
+        <ul id="team-list" class="team"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" data-tone="dark">
+    <div class="wrap">
+      <p class="eyebrow">References</p>
+      <ol id="references-list" class="references"></ol>
+      <p class="eyebrow">Data sources</p>
+      <ul id="sources-list" class="sources"></ul>
+      <p class="footer-note">Survey microdata are provided by the Philippine Statistics Authority under the PSADA Public Use File terms. Analysis and interpretation are the authors' own and do not represent the PSA.</p>
+    </div>
+  </footer>
+
+  <noscript><p class="wrap">This site needs JavaScript enabled to load its content.</p></noscript>
+
+  <script src="assets/js/content.js?v=20261002b"></script>
+  <script src="assets/js/main.js?v=20261002b"></script>
+</body>
+</html>
