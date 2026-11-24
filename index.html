@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261002c">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261125a">
 </head>
 <body>
   <svg class="sr-only" aria-hidden="true" focusable="false">
@@ -114,6 +114,20 @@
           <p class="lede" data-bind="findings.intro"></p>
         </header>
         <div id="findings-list" class="findings"></div>
+        <figure class="chart results reveal">
+          <figcaption class="chart-title" data-bind="findings.results.title"></figcaption>
+          <p class="chart-caption" data-bind="findings.results.intro"></p>
+          <div class="table-scroll">
+            <table class="var-table">
+              <thead><tr><th scope="col">Hyp.</th><th scope="col">Factor</th><th scope="col">n</th><th scope="col">Wald</th><th scope="col">df</th><th scope="col">p</th><th scope="col">Cramer's V</th><th scope="col">Decision</th><th scope="col">What it means</th></tr></thead>
+              <tbody id="results-rows"></tbody>
+            </table>
+          </div>
+        </figure>
+        <figure class="chart nutshell reveal">
+          <iframe id="nutshell-frame" title="Interactive regional map of the Philippines" loading="lazy"></iframe>
+          <div id="nutshell-caption" class="chart-caption"></div>
+        </figure>
         <div class="sheets">
           <h3 class="eyebrow-lg">Our data in Google Sheets</h3>
           <ul id="sheets-list" class="sheets-list"></ul>
@@ -160,7 +174,7 @@
 
   <noscript><p class="wrap">This site needs JavaScript enabled to load its content.</p></noscript>
 
-  <script src="assets/js/content.js?v=20261002c"></script>
-  <script src="assets/js/main.js?v=20261002c"></script>
+  <script src="assets/js/content.js?v=20261125a"></script>
+  <script src="assets/js/main.js?v=20261125a"></script>
 </body>
 </html>

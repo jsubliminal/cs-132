@@ -278,9 +278,31 @@
           ${sheetButton(f.sheet)}
         </header>
         ${f.summary ? `<p class="finding-summary">${inline(f.summary)}</p>` : ""}
+        ${f.test ? `
+        <details class="finding-test">
+          <summary>How we tested it</summary>
+          <p>${inline(f.test.method)}</p>
+          <ul>${f.test.stats.map((x) => `<li>${inline(x)}</li>`).join("")}</ul>
+        </details>` : ""}
         <div class="finding-charts">${charts || placeholder}</div>
       </article>`;
   }).join("");
+
+  const results = S.findings.results;
+  $("results-rows").innerHTML = results.rows.map((r) => `
+    <tr class="${r[7].startsWith("Reject") ? "is-reject" : "is-keep"}">${r.map((c) => `<td>${escapeHTML(c)}</td>`).join("")}</tr>`).join("");
+
+  const nutshell = S.findings.nutshell;
+  const frame = $("nutshell-frame");
+  // Size the map frame to its page so the region details below the map are not cut off.
+  const fitFrame = () => { frame.style.height = frame.contentDocument.documentElement.scrollHeight + "px"; };
+  frame.addEventListener("load", () => {
+    fitFrame();
+    new ResizeObserver(fitFrame).observe(frame.contentDocument.body);
+  });
+  frame.title = nutshell.title;
+  frame.src = nutshell.src;
+  $("nutshell-caption").innerHTML = nutshell.caption.map((c) => `<p>${inline(c)}</p>`).join("");
 
   document.querySelectorAll("[data-sheet-chart]").forEach((node) => {
     loadSheetChart(node, sheetCharts[+node.dataset.sheetChart]);
@@ -317,6 +339,12 @@
     <li class="member reveal">
       <span class="member-name">${escapeHTML(m.name)}</span>
       ${m.role ? `<span class="member-role">${inline(m.role)}</span>` : ""}
+      ${m.bio ? `<div class="member-bio">${m.bio.map((p) => `<p>${inline(p)}</p>`).join("")}</div>` : ""}
+      <p class="member-links">
+        ${m.email ? `<a href="mailto:${escapeHTML(m.email)}">${escapeHTML(m.email)}</a>` : ""}
+        ${m.linkedin ? `<a href="${escapeHTML(m.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ""}
+        ${m.github ? `<a href="${escapeHTML(m.github)}" target="_blank" rel="noopener">GitHub</a>` : ""}
+      </p>
     </li>`).join("");
 
   $("references-list").innerHTML = (S.references || []).map((r) => `<li>${inline(r)}</li>`).join("");

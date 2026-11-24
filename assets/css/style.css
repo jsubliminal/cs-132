@@ -411,6 +411,10 @@ code {
 .finding-head h3 { font: 800 clamp(1.25rem, 2.2vw, 1.7rem)/1 var(--display); letter-spacing: -0.02em; text-transform: uppercase; margin-bottom: 6px; }
 .finding-q { font: italic 600 0.8rem var(--display); text-transform: uppercase; letter-spacing: 0.02em; opacity: 0.8; margin: 0; }
 .finding-summary { max-width: 68ch; margin: 22px 0 0; }
+.finding-test { max-width: 68ch; margin: 16px 0 0; font-size: 0.9rem; }
+.finding-test summary { cursor: pointer; font: 700 0.85rem var(--display); text-transform: uppercase; letter-spacing: 0.02em; }
+.finding-test p, .finding-test ul { margin: 10px 0 0; }
+.finding-test li + li { margin-top: 6px; }
 .finding-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 20px; margin-top: 26px; }
 
 @media (max-width: 600px) {
@@ -432,6 +436,17 @@ code {
 .chart-title { font: 800 1rem/1.15 var(--display); text-transform: uppercase; letter-spacing: -0.005em; color: var(--blue); margin-bottom: 16px; }
 .chart-caption { font-size: 0.8rem; color: var(--ink-soft); margin: 14px 0 0; }
 .tone-blue .chart code { background: var(--blue-tint); color: var(--blue-deep); }
+
+.results, .nutshell { margin-top: 24px; }
+.results .chart-caption { margin: 0 0 16px; }
+.results td:nth-child(n+3):nth-child(-n+7) { font: 500 0.82rem var(--mono); white-space: nowrap; }
+.results .is-reject td:nth-child(8) { color: var(--blue); font-weight: 600; white-space: nowrap; }
+.results .is-keep td:nth-child(8) { white-space: nowrap; }
+.nutshell iframe { display: block; width: 100%; height: 80vh; border: 0; border-radius: 8px; }
+.nutshell .chart-caption p { margin: 0 0 8px; max-width: 80ch; }
+/* Matches the dark course theme of the map exported from the notebook. */
+.chart.nutshell { background: #1B181C; }
+.nutshell .chart-caption { color: #C8C1CB; }
 
 .bar-chart { display: grid; gap: 10px; }
 .bar-row { display: grid; grid-template-columns: minmax(80px, 34%) 1fr auto; align-items: center; gap: 12px; font-size: 0.85rem; }
@@ -472,6 +487,10 @@ code {
 }
 .member-name { font: 800 clamp(2rem, 5.5vw, 4.5rem)/0.95 var(--display); letter-spacing: -0.04em; text-transform: uppercase; }
 .member-role { font: 600 0.85rem var(--display); letter-spacing: 0.03em; text-transform: uppercase; opacity: 0.85; }
+.member-bio { flex-basis: 100%; max-width: 72ch; }
+.member-bio p { margin: 12px 0 0; }
+.member-links { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 14px 0 0; font: 600 0.85rem var(--display); }
+.member-links a { color: inherit; overflow-wrap: anywhere; }
 
 .references { margin: 0 0 40px; padding: 0; list-style: none; display: grid; gap: 12px; max-width: 90ch; }
 .references li { font-size: 0.88rem; line-height: 1.55; opacity: 0.85; padding-left: 2em; text-indent: -2em; }

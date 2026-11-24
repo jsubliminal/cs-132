@@ -120,7 +120,7 @@ window.SITE = {
           "What drives OFWs to push towards overseas contractual work and determine initial reasons for migrating abroad given local employment conditions.",
         hypothesis: {
           null: "Pre-departure domestic employment characteristics and regional demographics have no statistical significance on why OFWs migrate to contractual overseas work.",
-          alternative: "OFWs once come from lower-wage domestic occupations as well as out of the capital regional inequality which gives statistical significance to migrate for contractual labor.",
+          alternative: "OFWs come disproportionately from lower-wage domestic occupations and from outside the capital region, which gives statistical significance to migrating for contractual labor.",
         },
         objective: "To identify the different factors that push Filipinos to work abroad in comparison to finding work domestically.",
       },
@@ -130,8 +130,8 @@ window.SITE = {
         question:
           "What individual characteristics (i.e., gender, marital status, destination country, contract status) of Filipino workers predict their ability to maintain personal savings abroad (C18) in comparison to remitting near 100% of monthly earnings to their family?",
         hypothesis: {
-          null: "An individual's demographic characteristics have no statistically significant relationship with an OFW's allocation of monthly income with regards to their personal savings.",
-          alternative: "Having a higher level of educational attainment and a secure contract status makes up for positive denominators to maintain personal savings abroad.",
+          null: "An individual's demographic characteristics have no statistically significant relationship with their family's allocation of remittances into savings.",
+          alternative: "Having a higher level of educational attainment and a secure contract status make it more likely that an OFW's family allocates more remittances to savings in comparison to other spending categories.",
         },
         objective: "To be able to model the determinants of remittance allocation using the following quantifications:",
         objectiveItems: ["Demographic traits", "Human capital", "Contract", "Foreign destination"],
@@ -142,8 +142,8 @@ window.SITE = {
         question:
           "To what extent does an OFW's regional geographical location predict their chosen remittance transfer mode (i.e., Formal Banks vs. Door to Door vs. OTC)?",
         hypothesis: {
-          null: "The choice of remittance transfer is statistically independent of regional location.",
-          alternative: "Recipient households in islands and rural areas rely more on remittance transfers of Over-the-Counter (OTC) money transfer or door-to-door carriers compared to urbanized geographical locations.",
+          null: "The choice of remittance transfer mode is statistically independent of regional location.",
+          alternative: "Recipient households in island and rural areas rely more on OTC or door-to-door transfer compared to urbanized locations.",
         },
         objective: "To classify the primary remittance channel of OFWs by geographical location and socioeconomic status to understand the underlying factors influencing financial banking access.",
       },
@@ -245,30 +245,106 @@ window.SITE = {
 
   findings: {
     intro:
-      "Results are added here as each analysis is completed. Sections marked in progress are placeholders.",
+      "One chart per research question from our analysis notebook, the hypothesis test results, and the whole story on one map.",
     items: [
       {
         rq: "RQ1",
         title: "Why Filipinos leave",
-        summary: "",
+        summary:
+          "**H0 is rejected, and hypothesis testing partially supports H1.** Pre-departure occupation is the dominant factor separating contract OFWs from non-contract workers (F(9) = 303.82, p < 0.001, V = 0.336), while coming from outside NCR exerts a statistically significant but smaller independent regional effect (F(1) = 8.30, p = 0.004, crude V = 0.097). Although it is unclear whether most contractual OFWs had specifically lower-wage domestic occupations, there are significant differences in the percentages of contractual OFWs who had specific occupations (e.g., elementary) compared with others (e.g., managers and professionals).",
+        test: {
+          method:
+            "Contract-OFW status (`RQ10_REASON` = 1) among people already represented in the overseas-Filipino survey, compared across usual occupation and NCR/outside-NCR household origin. Both are genuinely pre-departure per the questionnaire (C9 occupation \"before he/she (last) left\"), but the file still does not include non-migrants or domestic wages; occupation is only a prior-work proxy and region is only a rough inequality proxy, so this tests association among surveyed OFWs rather than a true push-factor model.",
+          stats: [
+            "Occupation, adjusted for NCR/outside NCR: household-cluster robust linear probability model, Wald F(9) = 303.82, p < 0.001, N = 3,931; crude Cramer's V = 0.336.",
+            "NCR vs outside NCR, adjusted for occupation: household-cluster robust Wald F(1) = 8.30, p = 0.004; crude Cramer's V = 0.097.",
+          ],
+        },
         sheet: null,
-        charts: [],
+        charts: [
+          {
+            type: "image",
+            src: "assets/img/h1_contract_status.png",
+            alt: "Bar charts of the weighted share of contract OFWs by prior occupation, from about 97% for elementary occupations down to 40% for managers, and by household region, about 67% for NCR against 82% outside NCR.",
+            caption: "Weighted share of OFWs on a contract, by job held before leaving and by household region.",
+          },
+        ],
       },
       {
         rq: "RQ2",
         title: "Who manages to save",
-        summary: "",
+        summary:
+          "**H0 is rejected and H1 is not supported.** Contract status and prior educational attainment level do not correlate with families saving more money, but other demographic variables do. There is no significance of an OFW's family saving and their contract status (Wald F(1) = 0.78, p = 0.378; crude Cramer's V = 0.007). There is little significance of an OFW's family saving and their prior completed education level (Wald F(3) = 5.23, p = 0.156; crude Cramer's V = 0.098) as well as their destination region (Wald F(7) = 10.02, p = 0.187; crude Cramer's V = 0.116). However, marital status (Wald F(2) = 38.37, p < 0.001; crude Cramer's V = 0.153) and sex (Wald F(1) = 34.79, p < 0.001, N = 2,655; crude Cramer's V = 0.180) of an OFW are highly significant to whether the family contributes remittances to their savings.",
+        test: {
+          method:
+            "Comparing if remittance is allocated to savings by the receiving family (`RQ273P_SAVINGS` > 0, any_savings, from C27) versus all of it going to consumption or gifts. This is tested against different OFW demographics, such as sex, marital status, destination country (grouped into regions), contract status, and highest attained education, with household-clustered robust standard errors.",
+          stats: [
+            "Sex, adjusted for marital status, destination, and contract: Wald F(1) = 34.79, p < 0.001, N = 2,655; crude Cramer's V = 0.180.",
+            "Marital status, adjusted for the above: Wald F(2) = 38.37, p < 0.001; crude Cramer's V = 0.153.",
+            "Destination region, adjusted for the above: Wald F(7) = 10.02, p = 0.187; crude Cramer's V = 0.116.",
+            "Contract status, adjusted for the above: Wald F(1) = 0.78, p = 0.378; crude Cramer's V = 0.007.",
+            "Education, adjusted for the above: Wald F(3) = 5.23, p = 0.156; crude Cramer's V = 0.098.",
+          ],
+        },
         sheet: null,
-        charts: [],
+        charts: [
+          {
+            type: "image",
+            src: "assets/img/h2_savings_allocation.png",
+            alt: "Bar charts of the weighted mean share of remittances saved: about 15% for married, 11% for single and 8% for previously married OFWs, and from under 3% to about 19% across destination regions, highest for Europe and Australia.",
+            caption: "Weighted mean share of remittances set aside as savings, by marital status and by destination region.",
+          },
+        ],
       },
       {
         rq: "RQ3",
         title: "How money reaches home",
-        summary: "",
+        summary:
+          "**H0 rejected, and H1 is accepted.** When only comparing remittance transfer modes between whether the destination is urban or rural, there is a significant difference (Wald chi-square(2) = 59.16, p < 0.001), where utilizing Formal Banks is more prevalent in OFWs sending back to urban areas than rural areas. There is greater significance when specifying by island group (Wald chi-square(6) = 607.59, p < 0.001), with people sending remittances back to NCR via Formal Banks the most. When combining the two categories, it is proven that household geography is overwhelmingly significant (Wald chi-square(8) = 1687.00, p < 0.001; urban/rural crude Cramer's V = 0.184 and island group crude Cramer's V = 0.187).",
+        test: {
+          method:
+            "`RQ26_MODE` is recoded into three channels matching the hypothesis: Formal Bank, Door-to-door, and OTC (agency/local office, friends/co-workers, money-transfer services, and other modes). Geography available is household region (island group) and urban/rural classification, not province. Door-to-door has only 3 observations, so any door-to-door-specific conclusion is not reliable.",
+          stats: [
+            "Urban/rural terms: household-cluster robust multinomial Wald chi-square(2) = 59.16, p < 0.001.",
+            "Island-group terms: household-cluster robust multinomial Wald chi-square(6) = 607.59, p < 0.001.",
+            "All location terms jointly: Wald chi-square(8) = 1687.00, p < 0.001; crude Cramer's V = 0.184 for urban/rural and 0.187 for island group.",
+          ],
+        },
         sheet: null,
-        charts: [],
+        charts: [
+          {
+            type: "image",
+            src: "assets/img/h3_mode_by_location.png",
+            alt: "Stacked bar charts of remittance mode: formal banks are used by about 53% of urban and 35% of rural households, and by about 63% in NCR, 59% in the Visayas, 40% in Luzon and 27% in Mindanao, with over-the-counter services making up the rest.",
+            caption: "Share of households by reported remittance mode, by urban or rural location and by island group.",
+          },
+        ],
       },
     ],
+    results: {
+      title: "Hypothesis test results",
+      intro:
+        "Survey-weighted logistic regressions, each factor tested while holding the others constant. Cramer's V gives the effect size from an unweighted chi-square test.",
+      rows: [
+        ["H1", "Prior occupation", 3931, "303.82", 9, "< 0.001", "0.34", "Reject H0", "Plant and machine operators: 98% on a contract vs 66% for Professionals"],
+        ["H1", "NCR vs outside NCR", 3931, "8.30", 1, "0.004", "0.10", "Reject H0", "Outside NCR: 84% on a contract vs 77% for NCR"],
+        ["H2", "Sex", 2655, "34.79", 1, "< 0.001", "0.18", "Reject H0", "Female: 44% save vs 56% for Male"],
+        ["H2", "Marital status", 2655, "38.37", 2, "< 0.001", "0.15", "Reject H0", "Married: 53% save vs 41% for Single"],
+        ["H2", "Education", 2655, "5.23", 3, "0.156", "0.10", "Fail to reject H0", "No clear difference once the other factors are held constant"],
+        ["H2", "Destination region", 2655, "10.02", 7, "0.187", "0.12", "Fail to reject H0", "No clear difference once the other factors are held constant"],
+        ["H2", "Contract status", 2655, "0.78", 1, "0.378", "0.01", "Fail to reject H0", "No clear difference once the other factors are held constant"],
+        ["H3", "Urban vs rural", 2702, "61.22", 1, "< 0.001", "0.18", "Reject H0", "Rural: 65% use non-bank vs 48% for Urban"],
+        ["H3", "Island group", 2702, "157.93", 3, "< 0.001", "0.26", "Reject H0", "Mindanao: 73% use non-bank vs 45% for NCR"],
+      ],
+    },
+    nutshell: {
+      title: "Across Philippine Regions, How OFWs Work and Remit",
+      src: "assets/nutshell/index.html",
+      caption: [
+        "How did overseas Filipinos work, send money home, and help their families save in 2024? The map colors show how often banks were used to send money home. Taller gold bars show that families set aside a larger share of the money they received. The percentage beside each labeled region shows how many surveyed overseas Filipinos from that region left as contract workers.",
+        "Contract work varied by previous job and home region. Whether families saved any of the money they received was linked to the worker's sex and marital status. After accounting for other factors, the analysis found no clear link with education or contract status. How families received money also varied by island group and between urban and rural areas. The savings figures describe what families in the Philippines set aside.",
+      ],
+    },
   },
 
   sheets: [
@@ -317,10 +393,50 @@ window.SITE = {
 
   team: {
     members: [
-      { name: "Jesua Alfaro", role: "" },
-      { name: "Reuter Camacho", role: "" },
-      { name: "Alphonso Carandang", role: "" },
-      { name: "Alexis Geronimo", role: "" },
+      {
+        name: "Jesua Alfaro",
+        role: "",
+        bio: [
+          "¡Hola! I'm Jesua James C. Alfaro, a third-year Computer Science student at the University of the Philippines Diliman who loves both art and technology. I'm active in the UP Association of Computer Science Majors and UP Advertising Core. Serving as a senior art director there has taught me a lot about leadership, project management, and working with people from many different backgrounds.",
+          "Outside school, I love film and the arts. They inspire a lot of the technical work I do, and I see that as proof that STEM and the arts can work together. I'm also into books, music, and learning languages (¡estoy aprendiendo español ahora mismo!). I play four instruments, I'm in a band, and I try to read at least one book a month, even with a busy schedule.",
+        ],
+        email: "jesuajamesalfaro655@gmail.com",
+        linkedin: "https://www.linkedin.com/in/jesua-alfaro/",
+        github: "https://github.com/jsubliminal",
+      },
+      {
+        name: "Reuter Camacho",
+        role: "",
+        bio: [
+          "Hello! I am Reuter Jan F. Camacho, a Computer Science student at the University of the Philippines Diliman with a strong interest in algorithms, software engineering, artificial intelligence, and computational problem-solving. I have participated in competitions such as NOI.PH and the ICPC Asia Manila Regionals. I am also a participant in the International Collegiate Artificial Intelligence Contest (ICAIC).",
+          "Outside of academics, my interest in algorithms and problem-solving has always extended into my hobbies. Whether it's solving a Rubik's Cube, playing chess, or strategizing in card games like Yu-Gi-Oh!, I've always enjoyed activities that involve pattern recognition, planning, and thinking several steps ahead. I guess I've always found fun in problems that require a little strategy!",
+        ],
+        email: "rjfc123.mny@gmail.com",
+        linkedin: "https://www.linkedin.com/in/reuter-jan-camacho",
+        github: "https://github.com/chry607",
+      },
+      {
+        name: "Alphonso Carandang",
+        role: "",
+        bio: [
+          "Hello! I am Alphonso Clarence C. Carandang, a third-year Computer Science student at the University of the Philippines Diliman with an interest in bridging technology, business, and finance. Beyond academics, I am actively involved in UP CURSOR and UP JFA, where I have developed an appreciation for leadership, project management, and working with people from different backgrounds.",
+          "Outside of technology, I grew interested in human resources and I enjoy exploring different creative outlets, from photography to meditation to music mixing. Recently, I've been experimenting with DJing and origami as ways to discover new ways to express my creativity. The interesting learning experiences happen outside our own fields of study.",
+        ],
+        email: "lance322006@gmail.com",
+        linkedin: "https://www.linkedin.com/in/alphonso-clarence-carandang",
+        github: "https://github.com/AgentCheems",
+      },
+      {
+        name: "Alexis Geronimo",
+        role: "",
+        bio: [
+          "Hello! I am Alexis, and I am a 4th-year student studying Computer Science as an exchange student at the University of the Philippines Diliman, originally from Rutgers University New Brunswick. I am interested in Machine Learning and Data Science and have experience using large datasets to make predictions in the fields of consumer care and the food and service industries.",
+          "Outside of technology, I am interested in language learning, arts & crafts, and performing music. If you catch me not working, you'll find me catching up on my daily Anki vocabulary deck, crafting a gift for the next nearest birthday, or rehearsing with my band for our next gig!",
+        ],
+        email: "alexispgeronimo@gmail.com",
+        linkedin: "https://www.linkedin.com/in/alexisgeronimo",
+        github: "https://github.com/alxxis",
+      },
     ],
   },
 
