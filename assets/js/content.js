@@ -126,9 +126,9 @@ window.SITE = {
       },
       {
         id: "RQ2",
-        label: "Savings vs. remittance",
+        label: "Family savings",
         question:
-          "What individual characteristics (i.e., gender, marital status, destination country, contract status) of Filipino workers predict their ability to maintain personal savings abroad (C18) in comparison to remitting near 100% of monthly earnings to their family?",
+          "What individual characteristics (i.e., gender, marital status, destination country, contract status, education) of Filipino workers predict their family's ability to contribute to savings?",
         hypothesis: {
           null: "An individual's demographic characteristics have no statistically significant relationship with their family's allocation of remittances into savings.",
           alternative: "Having a higher level of educational attainment and a secure contract status make it more likely that an OFW's family allocates more remittances to savings in comparison to other spending categories.",
@@ -370,10 +370,6 @@ window.SITE = {
       {
         title: "Geography",
         body: "Region comes from `RREG` (17 administrative regions, coded within a 1 to 19 range). Urban vs. rural comes from `RURB2020`. No finer geography is available in the public file.",
-      },
-      {
-        title: "A note on naming",
-        body: "Our proposal informally refers to personal savings as \"C18\". The actual SOF variable is `RQ273P_SAVINGS`, the percentage of the remittance spent on savings. This site uses the real variable name throughout.",
       },
     ],
     variables: [
